@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <centrer> 
+    <title>Traductor de código Morse</title>
+</head>
+<body>
+<h1>Traductor de código Morse</h1>
+<!--Introducir texto o a codigo para traducir-->
+<p>Introduce el mensaje que deseas traducir:</p>
+<input type="text" id="mensaje" name="mensaje">
+    <p> modo de traduccion:</p>
+    <select id="direccion" name="direccion">
+<!--Botone Cambio de modo de traduccion -->
+        <option value="morse-a-texto">De código Morse a texto</option>
+        <option value="texto-a-morse">De texto a código Morse</option>
+    </select>
+    <br>
+    <button onclick="traducir()">Traducir</button>
+    <p>Resultado:</p>
+    <span id="resultado"></span>
+</centrer>
+    <!--Emepieza Script En Javascript para el tradutor de morse a Texto y viceversa  -->
+    
+    <Script> 
+    
+// Abecedario Morse
+    
+    const codigoMorse = {
+    ".-": "a", "-...": "b", "-.-.": "c", "-..": "d", ".": "e",
+    "..-.": "f", "--.": "g", "....": "h", "..": "i", ".---": "j",
+    "-.-": "k", ".-..": "l", "--": "m", "-.": "n", "---": "o",
+    ".--.": "p", "--.-": "q", ".-.": "r", "...": "s", "-": "t",
+    "..-": "u", "...-": "v", ".--": "w", "-..-": "x", "-.--": "y",
+    "--..": "z", "/": " "
+    };
+// codigo para la traduccion 
+    function traducirMorseATexto(mensaje) {
+    return mensaje.split(" ").map(simbolo => codigoMorse[simbolo] || "").join("");
+    }
+    function traducirTextoAMorse(mensaje) {
+    return mensaje.toLowerCase().split("").map(letra => Object.keys(codigoMorse).find(key => codigoMorse[key] === letra) || "").join(" ");
+    }
+function traducir() {
+    var mensaje = document.getElementById("mensaje").value.trim();
+    var direccion = document.getElementById("direccion").value;
+    var resultado = "";
+if (direccion === "morse-a-texto") {
+    resultado = traducirMorseATexto(mensaje);
+    } else if (direccion === "texto-a-morse") {
+    resultado = traducirTextoAMorse(mensaje);
+    }
+    document.getElementById("resultado").textContent = resultado;
+    }
+    </script>
+</body>
+</html>
